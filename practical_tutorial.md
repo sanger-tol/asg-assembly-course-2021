@@ -25,15 +25,28 @@ Create a working folder for this course:
 
 ## Part 1 - Estimating genome size
 
-As you learned in the theoretical lectures, genome sizes can be estimated by kmer analyses of high-quality reads, such as Illumina and Pacbio HiFi. To do it so, first you would need install kmc on your computer and generate a kmer count with it. You can have a look at the example command line below although we will not run KMC in this course and you **don't have to run** the following six lines now:
+As you learned in the theoretical lectures, genome sizes can be estimated by kmer analyses of high-quality reads, such as Illumina and Pacbio HiFi. To do it so, first you would need to generate a kmer count histogram using KMC tool. It may require a significant amount of time, that's why we try it on the toy containing a subset of 1000 reads below.  
 
+If your genome is **idEriArbu1** genome run the following commands:
+   
+    cd /home/training/assembly/workdir
     mkdir tmp
-    kmc -k21 -t8 -m20 -ci1 -cs2000000 -fa -sm /home/training/assembly/data/raw/ilThySylv1/ilThySylv1.filtered.1000.fasta.gz ilThySylv1.k21 tmp
-    kmc_tools transform ilThySylv1.k21 histogram ilThySylv1.k21.hist -cx2000000
+    singularity exec /home/training/assembly/images/kmc-3.1.0.sif kmc -k21 -t8 -m20 -ci1 -cs2000000 -fa -sm /home/training/assembly/data/raw/idEriArbu1/idEriArbu1.filtered.1000.fasta.gz idEriArbu1.k21 tmp
+    singularity exec /home/training/assembly/images/kmc-3.1.0.sif kmc_tools transform idEriArbu1.k21 histogram idEriArbu1.k21.hist -cx2000000
+    awk '$2!=0' idEriArbu1.k21.hist > tmp/idEriArbu1.k21.hist
+    mv tmp/idEriArbu1.k21.hist idEriArbu1.k21.hist
+
+If your genome is **ilThySylv1**, run the following commands:
+
+    cd /home/training/assembly/workdir
+    mkdir tmp
+    singularity exec /home/training/assembly/images/kmc-3.1.0.sif kmc -k21 -t8 -m20 -ci1 -cs2000000 -fa -sm /home/training/assembly/data/raw/ilThySylv1/ilThySylv1.filtered.1000.fasta.gz ilThySylv1.k21 tmp
+    singularity exec /home/training/assembly/images/kmc-3.1.0.sif kmc_tools transform ilThySylv1.k21 histogram ilThySylv1.k21.hist -cx2000000
     awk '$2!=0' ilThySylv1.k21.hist > tmp/ilThySylv1.k21.hist
     mv tmp/ilThySylv1.k21.hist ilThySylv1.k21.hist
-
-<ins>Obs</ins>: As running a KMC database requires a significant amount of time to finish, we have generated the final results for you. Now, you need to take the final histogram file and plot it with [GenomeScope](https://github.com/tbenavi1/genomescope2.0). You can use the [online browser version](http://qb.cshl.edu/genomescope/genomescope2.0/) or you can use the command lines bellow:
+    
+    
+<ins>Obs</ins>: Now you've head a look at how to generate a KMC histogram on the toy dataset. We have generated the final results for the whole dataset in advance. Now, you need to take the pre-computed final histogram file (``/home/training/assembly/data/preqc/idEriArbu1/idEriArbu1.k21.hist`` or ``/home/training/assembly/data/preqc/ilThySylv1/ilThySylv1.k21.hist``) and plot it with [GenomeScope](https://github.com/tbenavi1/genomescope2.0). You can use the [online browser version](http://qb.cshl.edu/genomescope/genomescope2.0/) or you can use the command lines bellow:
 
 
 Change to the working folder:
