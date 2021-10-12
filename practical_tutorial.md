@@ -76,7 +76,9 @@ http://darwin.cog.sanger.ac.uk/ilThySylv1.filtered.fasta.gz
 
 ### 2.1 - Genome assembly with hifiasm
 
-Create a folder where your results will be stored and then run the assembler: 
+Create a folder where your results will be stored and then run the assembler. 
+
+For **idEriArbu1**, run:
 
     cd /home/training/assembly/workdir/
     mkdir idEriArbu1.hifiasm 
@@ -84,47 +86,56 @@ Create a folder where your results will be stored and then run the assembler:
     #now that you created your folder and changed to it, let’s run hifiasm
     singularity exec /home/training/assembly/images/hifiasm-0.15.3.sif hifiasm  -t8 --primary -o idEriArbu1 /home/training/assembly/data/raw/idEriArbu1/idEriArbu1.filtered.1000.fasta.gz
 
-or for ilThySylv1,
+or, for **ilThySylv1**, run:
 
     cd /home/training/assembly/workdir/
     mkdir ilThySylv1.hifiasm 
     cd ilThySylv1.hifiasm
     singularity exec /home/training/assembly/images/hifiasm-0.15.3.sif hifiasm  -t8 --primary -o ilThySylv1 /home/training/assembly/data/raw/ilThySylv1/ilThySylv1.filtered.1000.fasta.gz
     
-<ins>Obs</ins>: The results of hifiasm runs on the full datasets can be found in the `/home/training/assembly/data/assembly` folder. You can have a look at some general quantitative assembly statistics by running the following commands:
+<ins>Obs</ins>: The results of hifiasm runs on the full datasets can be found in the `/home/training/assembly/data/assembly` folder. You can have a look at some general quantitative assembly statistics by running the following commands. 
+
+For **idEriArbu1**, run:
 
     singularity exec /home/training/assembly/images/asmstats.sif asmstats /home/training/assembly/data/assembly/idEriArbu1/idEriArbu1.p_ctg.fa.gz
     singularity exec /home/training/assembly/images/asmstats.sif asmstats /home/training/assembly/data/assembly/idEriArbu1/idEriArbu1.a_ctg.fa.gz
+    
+or, for **ilThySylv1**, run:
+
     singularity exec /home/training/assembly/images/asmstats.sif asmstats /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.p_ctg.fa.gz
     singularity exec /home/training/assembly/images/asmstats.sif asmstats /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.a_ctg.fa.gz
 
 ### 2.2 - Running BUSCO
 
-BUSCO is an important metric to evaluate the assembly completeness in gene level. We are running BUSCO using the following command lines:
+BUSCO is an important metric to evaluate the assembly completeness in gene level. 
 
-    cd /home/training/assembly/workdir/
-    gunzip -c /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.p_ctg.fa.gz > /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.p_ctg.fa
-    singularity exec /home/training/assembly/images/busco-5.0.0_cv1.sif busco -i /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.p_ctg.fa -c 8 -o ilThySylv1.busco5 -m genome -l /home/training/assembly/data/busco/lineages/insecta_odb10 --offline
+To run BUSCO on **idEriArbu1**, run:
 
-or for ilThySylv1,
-    
     cd /home/training/assembly/workdir/
     gunzip -c /home/training/assembly/data/assembly/idEriArbu1/idEriArbu1.p_ctg.fa.gz > /home/training/assembly/data/assembly/idEriArbu1/idEriArbu1.p_ctg.fa
     singularity exec /home/training/assembly/images/busco-5.0.0_cv1.sif busco -i /home/training/assembly/data/assembly/idEriArbu1/idEriArbu1.p_ctg.fa.gz -c 8 -o idEriArbu1.busco5 -m genome -l /home/training/assembly/data/busco/lineages/insecta_odb10 --offline
 
+or, for **ilThySylv1**, run:
+    
+    cd /home/training/assembly/workdir/
+    gunzip -c /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.p_ctg.fa.gz > /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.p_ctg.fa
+    singularity exec /home/training/assembly/images/busco-5.0.0_cv1.sif busco -i /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.p_ctg.fa -c 8 -o ilThySylv1.busco5 -m genome -l /home/training/assembly/data/busco/lineages/insecta_odb10 --offline
+
 We also have the BUSCO results for the hifiasm assembly. Download the precomputed results and have a look at the results, especially the "short summary" file.
 
-    cd /home/training/assembly/workdir/
-    wget https://darwin.cog.sanger.ac.uk/ilThySylv1.p_ctg.insecta_odb10.busco.tar.gz
-    tar -xzvf ilThySylv1.p_ctg.insecta_odb10.busco.tar.gz
-    cd ilThySylv1.p_ctg.insecta_odb10.busco
-
-or for ilThySylv1,
+For **idEriArbu1**, run:
 
     cd /home/training/assembly/workdir/
     wget https://darwin.cog.sanger.ac.uk/idEriArbu1.p_ctg.insecta_odb10.busco.tar.gz
     tar -xzvf idEriArbu1.p_ctg.insecta_odb10.busco.tar.gz
     cd idEriArbu1.p_ctg.insecta_odb10.busco
+
+or, for **ilThySylv1**, run:
+    
+    cd /home/training/assembly/workdir/
+    wget https://darwin.cog.sanger.ac.uk/ilThySylv1.p_ctg.insecta_odb10.busco.tar.gz
+    tar -xzvf ilThySylv1.p_ctg.insecta_odb10.busco.tar.gz
+    cd ilThySylv1.p_ctg.insecta_odb10.busco
 
 #### **_Quiz_**
 
@@ -140,17 +151,21 @@ Looking at the statistics and BUSCO results for the hifiasm assembly, answer the
 
 As you learned in the theoretical classes, separation of haplotypes is usually not complete. We use a software called [purge_dups](https://github.com/dfguan/purge_dups) to further separate the haplotypes and to remove remaining haplotypic duplication from the primary assembly. Purge_dups has many steps and can take a significant amount of time to run. That's why the assembly produced by hifiasm was purged for you in advance and now you can generate the general statistics for the purged assemblies and evaluate the BUSCO results.
 
+For **idEriArbu1**, run:
+
     singularity exec /home/training/assembly/images/asmstats.sif asmstats /home/training/assembly/data/assembly/idEriArbu1/purged/idEriArbu1.purged.fa.gz
     singularity exec /home/training/assembly/images/asmstats.sif asmstats /home/training/assembly/data/assembly/idEriArbu1/purged/idEriArbu1.purged.htigs.fa.gz
 
-or for ilThySylv1,
+or, for **ilThySylv1**, run:
 
     singularity exec /home/training/assembly/images/asmstats.sif asmstats /home/training/assembly/data/assembly/ilThySylv1/purged/ilThySylv1.purged.fa.gz
     singularity exec /home/training/assembly/images/asmstats.sif asmstats /home/training/assembly/data/assembly/ilThySylv1/purged/ilThySylv1.purged.htigs.fa.gz
 
 ### 2.4 - Kmer plots to evaluate assembly quality
 
-Apart from comparing quantitative statistics and the BUSCO score of the assemblies, there are other metrics and methods that help us evaluate assembly completeness and quality. One method discussed in the theoretical class is [merqury](https://github.com/marbl/merqury). Merqury evaluates assembly kmer completeness and duplication level by generating series of plots and statistics of a genome assembly vs. its reads counterparts. To do this comparison, you need to run merqury in all versions of your assembly, i.e. pre and post purging. The command-line bellow illustrates the way merqury can be run on a genome assembl, which in case of a large enough genome can also be a little time consumning:
+Apart from comparing quantitative statistics and the BUSCO score of the assemblies, there are other metrics and methods that help us evaluate assembly completeness and quality. One method discussed in the theoretical class is [merqury](https://github.com/marbl/merqury). Merqury evaluates assembly kmer completeness and duplication level by generating series of plots and statistics of a genome assembly vs. its reads counterparts. To do this comparison, you need to run merqury in all versions of your assembly, i.e. pre and post purging. The command-line bellow illustrates the way merqury can be run on a genome assembl, which in case of a large enough genome can also be a little time consumning. 
+
+For **idEriArbu1**, run:
 
     # Run merqury for the raw assembly of idEriArbu1
     mkdir merqury.idEriArbu1.raw
@@ -162,7 +177,7 @@ Apart from comparing quantitative statistics and the BUSCO score of the assembli
     cd merqury.idEriArbu1.purged
     singularity exec /home/training/assembly/images/merqury-1.1.sif merqury.sh /home/training/assembly/data/preqc/idEriArbu1/idEriArbu1.10x.k21.meryl/ /home/training/assembly/data/assembly/idEriArbu1/purged/idEriArbu1.purged.fa.gz /home/training/assembly/data/assembly/idEriArbu1/purged/idEriArbu1.purged.htigs.fa.gz idEriArbu1 
 
-or for ilThySylv1,
+or, for **ilThySylv1**, run:
 
     # Run merqury for the raw assembly of ilThySylv1:
     cd /home/training/assembly/workdir/
@@ -177,28 +192,30 @@ or for ilThySylv1,
 
 As you put your command to run, please visit the final results folder to have a look at the merqury results for pre and post purging for your species. 
 
-finished output:
+The finished output for **idEriArbu1** can be found here:
 
-    /home/training//assembly/data/merqury/idEriArbu1
-    /home/training//assembly/data/merqury/idEriArbu1_purged
+    /home/training/assembly/data/merqury/idEriArbu1
+    /home/training/assembly/data/merqury/idEriArbu1_purged
 
-or for ilThySylv1,
+or, for **ilThySylv1**: 
 
-    /home/training//assembly/data/merqury/ilThySylv1
-    /home/training//assembly/data/merqury/ilThySylv1_purged
+    /home/training/assembly/data/merqury/ilThySylv1
+    /home/training/assembly/data/merqury/ilThySylv1_purged
 
 ### 2.5 - Evaluating pre and post genome purging
 
 You have now tried to run and evaluate the results of several stages of the genome assembly process, which included running (i) hifiasm, (ii) purge_dups, (iii) merqury, (iv) asmstats and (v) BUSCO commands. 
 
-Recapping, the assembly, purge and merqury results for each species are here:
+Recapping, the assembly, purge and merqury results for each species are here. 
+
+**idEriArbu1**:
 
     /home/training/assembly/data/assembly/idEriArbu1/idEriArbu1.p_ctg.fa.gz
     /home/training/assembly/data/assembly/idEriArbu1/idEriArbu1.a_ctg.fa.gz 
     /home/training/assembly/data/assembly/idEriArbu1/purged/idEriArbu1.purged.fa.gz
     /home/training/assembly/data/assembly/idEriArbu1/purged/idEriArbu1.purged.htigs.fa.gz
 
-or for ilThySylv1,
+**ilThySylv1**:
 
     /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.p_ctg.fa.gz
     /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.a_ctg.fa.gz 
@@ -221,12 +238,14 @@ Considering all the results generated before and after purging of your species a
 
 A final part of the automated pipeline for a genome assembly is scaffolding. Here we will scaffold our Pacbio Hifi polished assembly with [Hi-C](https://pubmed.ncbi.nlm.nih.gov/22652625/) data using a software called [SALSA2](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007273). Scaffolding procedure also involves many steps that you can read about in the Salsa manual and that demand significant amount of time. We will use our time to look at the general statistics and to interpret the contact maps that are generated after assemblies are scaffolded with Hi-C reads. Giving your species, download the results and unzip.
 
+For **idEriArbu1**, run: 
+
     cd /home/training/assembly/workdir/
     wget https://darwin.cog.sanger.ac.uk/idEriArbu1.hifiasm.scaff.20210610.tar.gz
     tar -xzvf idEriArbu1.hifiasm.scaff.20210610.tar.gz
     cd idEriArbu1.hifiasm.scaff.20210610
 
-or for ilThySylv1,
+or, for **ilThySylv1**, run:
 
     cd /home/training/assembly/workdir/
     wget https://darwin.cog.sanger.ac.uk/ilThySylv1.hifiasm.scaff.20210527.tar.gz
@@ -241,11 +260,11 @@ have a look at the files inside:
 - busco5
 
 
-The scaffold FASTA file is:
+The scaffold FASTA file is for **idEriArbu1** is:
 
     /home/training/assembly/data/assembly/idEriArbu1/scaff/idEriArbu1.scaffolds_FINAL.fasta
 
-or for ilThySylv1,
+or, for **ilThySylv1**:
 
     /home/training/assembly/data/assembly/ilThySylv1/scaff/ilThySylv1.scaffolds_FINAL.fasta
 
@@ -258,9 +277,11 @@ Launch Juicebox using the command below:
 
 and then open the .hic file by going to File > Open > Local ...
 
+**idEriArbu1**:
+
     /home/training/assembly/workdir/idEriArbu1.hifiasm.scaff.20210610/salsa_scaffolds.hic
     
- or for ilThySylv1,   
+**ilThySylv1**
     
     /home/training/assembly/workdir/ilThySylv1.hifiasm.scaff.20210527/salsa_scaffolds.hic
 
