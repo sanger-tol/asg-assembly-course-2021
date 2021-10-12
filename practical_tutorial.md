@@ -13,10 +13,10 @@
 [Part 5 - Quiz and presentation](#part-5---quiz-and-presentation) &nbsp;&nbsp;&nbsp;&nbsp; <ins>[Quiz](#part-5---quiz-and-presentation)</ins>
 
 ***
-Consider the two species in the following paths and choose the one you will work with. The species are [Thymelicus sylvestris](https://tolqc.cog.sanger.ac.uk/darwin/insects/Thymelicus_sylvestris/) and [Eristalis arbustorum](https://tolqc.cog.sanger.ac.uk/darwin/insects/Eristalis_arbustorum/). The genomic data for them are here:
+Consider the two species in the following paths and choose the one you will work with. The species are [Eristalis arbustorum](https://tolqc.cog.sanger.ac.uk/darwin/insects/Eristalis_arbustorum/) (ToLID: **idEriArbu1**) and [Thymelicus sylvestris](https://tolqc.cog.sanger.ac.uk/darwin/insects/Thymelicus_sylvestris/) (ToLID: **ilThySylv1**). The genomic data for them are here:
   
-    /home/training/assembly/data/assembly/ilThySylv1
     /home/training/assembly/data/assembly/idEriArbu1
+    /home/training/assembly/data/assembly/ilThySylv1
 
 Create working folder for this course:
 
@@ -45,12 +45,21 @@ create the folder for genomes scope results and run the following commands from 
 
     mkdir genomescope 
     cd genomescope
-    singularity run  /home/training/assembly/images/genomescope-2.0.sif  -i /home/training/assembly/data/preqc/ilThySylv1/ilThySylv1.k21.hist  -o ilThySylv1.genomescope.output -k 21
-    singularity run  /home/training/assembly/images/genomescope-2.0.sif  -i /home/training/assembly/data/preqc/idEriArbu1/idEriArbu1.k21.hist  -o idEriArbu1.genomescope.output -k 21
+    
+For **idEriArbu1**, run: 
 
-change to results folder:
+    singularity run  /home/training/assembly/images/genomescope-2.0.sif  -i /home/training/assembly/data/preqc/idEriArbu1/idEriArbu1.k21.hist  -o idEriArbu1.genomescope.output -k 21
+    
+or, for **ilThySylv1**, run:
+
+    singularity run  /home/training/assembly/images/genomescope-2.0.sif  -i /home/training/assembly/data/preqc/ilThySylv1/ilThySylv1.k21.hist  -o ilThySylv1.genomescope.output -k 21
+
+Change to results folder using:
 
     cd /home/training/assembly/workdir/genomescope/idEriArbu1.genomescope.output
+    
+Or: 
+
     cd /home/training/assembly/workdir/genomescope/ilThySylv1.genomescope.output
 
 #### **_Quiz_**
