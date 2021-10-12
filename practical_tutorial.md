@@ -240,9 +240,7 @@ Considering all the results generated before and after purging of your species a
 
 &nbsp;&nbsp;&nbsp;&nbsp; 10. Where in the merqury plots can you spot the difference in haplotypic retention pre and post purging?
 
-## Part 3 - Polishing assemblies
-
-## Part 4 - Scaffolding assembly with Hi-C data
+## Part 3 - Scaffolding assembly with Hi-C data
 
 A final part of the automated pipeline for a genome assembly is scaffolding. Here we will scaffold our Pacbio Hifi polished assembly with [Hi-C](https://pubmed.ncbi.nlm.nih.gov/22652625/) data using a software called [SALSA2](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007273). Scaffolding procedure also involves many steps that you can read about in the Salsa manual and that demand significant amount of time. We will use our time to look at the general statistics and to interpret the contact maps that are generated after assemblies are scaffolded with Hi-C reads. Giving your species, download the results and unzip.
 
@@ -306,7 +304,7 @@ Checking the scaffolds and HiC contact map, answer the following questions:
 &nbsp;&nbsp;&nbsp;&nbsp; 14. How does your final contact map looks like? What are the squares in the diagonal? What do the signals off diagonal represent?
 
 
-## Part 5 - Quiz and presentation
+## Part 4 - Quiz and presentation
 
 We have now completed our analysis. Now, talk to your colleagues and make a few slides with the following information.
 
