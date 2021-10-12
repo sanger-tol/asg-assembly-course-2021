@@ -18,30 +18,29 @@ Consider the two species in the following paths and choose the one you will work
     /home/training/assembly/data/assembly/idEriArbu1
     /home/training/assembly/data/assembly/ilThySylv1
 
-Create working folder for this course:
+Create a working folder for this course:
 
     rm -r /home/training/assembly/workdir
     mkdir /home/training/assembly/workdir
 
 ## Part 1 - Estimating genome size
 
-As you learned in the theoretical lectures, genome sizes can be estimated by kmer analyses of high-quality reads, such as Illumina and Pacbio Hifi. To do it so, first you would need install kmc on your computer and generate a kmer count with it. You can have a look at the example command line below although we will not run KMC in this course and you **don't have to run** the following six lines now:
+As you learned in the theoretical lectures, genome sizes can be estimated by kmer analyses of high-quality reads, such as Illumina and Pacbio HiFi. To do it so, first you would need install kmc on your computer and generate a kmer count with it. You can have a look at the example command line below although we will not run KMC in this course and you **don't have to run** the following six lines now:
 
-    # $sample.fofn is a list on per line of PacBio HiFi data
     mkdir tmp
-    kmc -k21 -t4 -m20 -ci1 -cs2000000 -fbam -sm @$sample.fofn $sample.k21 tmp
-    kmc_tools transform $sample.k21 histogram $sample.k21.hist -cx2000000
-    awk '$2!=0' $sample.k21.hist > tmp/$sample.k21.hist
-    mv tmp/$sample.k21.hist $sample.k21.hist
+    kmc -k21 -t8 -m20 -ci1 -cs2000000 -fa -sm /home/training/assembly/data/raw/ilThySylv1/ilThySylv1.filtered.1000.fasta.gz ilThySylv1.k21 tmp
+    kmc_tools transform ilThySylv1.k21 histogram ilThySylv1.k21.hist -cx2000000
+    awk '$2!=0' ilThySylv1.k21.hist > tmp/ilThySylv1.k21.hist
+    mv tmp/ilThySylv1.k21.hist ilThySylv1.k21.hist
 
-<ins>Obs</ins>: As running a KMC database requires a significant amount of time to finish, we have generated the final results for you. Now, you need to take the final histogram file and plot it with genomescope. You can use the [online browser version](http://qb.cshl.edu/genomescope/genomescope2.0/) or you can use the command lines bellow:
+<ins>Obs</ins>: As running a KMC database requires a significant amount of time to finish, we have generated the final results for you. Now, you need to take the final histogram file and plot it with [GenomeScope](https://github.com/tbenavi1/genomescope2.0). You can use the [online browser version](http://qb.cshl.edu/genomescope/genomescope2.0/) or you can use the command lines bellow:
 
 
-change to the working folder: 
+Change to the working folder:
     
     cd /home/training/assembly/workdir
 
-create the folder for genomes scope results and run the following commands from it:
+Create the folder for GenomeScope results and run the following commands from it:
 
     mkdir genomescope 
     cd genomescope
@@ -54,7 +53,7 @@ or, for **ilThySylv1**, run:
 
     singularity run  /home/training/assembly/images/genomescope-2.0.sif  -i /home/training/assembly/data/preqc/ilThySylv1/ilThySylv1.k21.hist  -o ilThySylv1.genomescope.output -k 21
 
-Change to results folder using:
+Change to the results folder using:
 
     cd /home/training/assembly/workdir/genomescope/idEriArbu1.genomescope.output
     
@@ -64,7 +63,7 @@ Or:
 
 #### **_Quiz_**
 
-Now that you have (i) started a kmer counter run, (ii) plotted the pre-computed results in genome scope, you can analyse them and discuss them with your colleagues.  Answer the following questions:
+Now that you have (i) started a kmer counter run, (ii) plotted the pre-computed results in GenomeScope, you can analyse them and discuss them with your colleagues.  Answer the following questions:
 
 &nbsp;&nbsp;&nbsp;&nbsp; 1. What is the estimated genome size?
 
@@ -152,7 +151,7 @@ Looking at the statistics and BUSCO results for the hifiasm assembly, answer the
 
 &nbsp;&nbsp;&nbsp;&nbsp; 5. Why do we have a “p” and “a” assembly results?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 6. What is the general statistics for the primary and alternate assemblies? How many contigs? N50? Total assembly length?
+&nbsp;&nbsp;&nbsp;&nbsp; 6. What are the general statistics for the primary and alternate assemblies? How many contigs? N50? Total assembly length?
 
 &nbsp;&nbsp;&nbsp;&nbsp; 7. How many complete BUSCO genes are identified in the primary contigs? How many of them were duplicated?
 
