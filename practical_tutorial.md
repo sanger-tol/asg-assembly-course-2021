@@ -25,7 +25,7 @@ Create working folder for this course:
 
 ## Part 1 - Estimating genome size
 
-As you learned in the theoretical lectures, genome sizes can be estimated by kmer analyses of high-quality reads, such as Illumina and Pacbio Hifi. To do it so, first you need to generate a kmer count with the commands below:
+As you learned in the theoretical lectures, genome sizes can be estimated by kmer analyses of high-quality reads, such as Illumina and Pacbio Hifi. To do it so, first you would need install kmc on your computer and generate a kmer count with it. You can have a look at the example command line below although we will not run KMC in this course and you **don't have to run** the following six lines now:
 
     # $sample.fofn is a list on per line of PacBio HiFi data
     mkdir tmp
@@ -34,7 +34,7 @@ As you learned in the theoretical lectures, genome sizes can be estimated by kme
     awk '$2!=0' $sample.k21.hist > tmp/$sample.k21.hist
     mv tmp/$sample.k21.hist $sample.k21.hist
 
-<ins>Obs</ins>: Because we don’t have enough time to wait for your kmer count to finish, we have generated the final results for you. Now, you need to take this final histogram file and plot on genomescope. You can use the [online browser version](http://qb.cshl.edu/genomescope/genomescope2.0/) or you can use the command lines bellow:
+<ins>Obs</ins>: As running a KMC database requires a significant amount of time to finish, we have generated the final results for you. Now, you need to take the final histogram file and plot it with genomescope. You can use the [online browser version](http://qb.cshl.edu/genomescope/genomescope2.0/) or you can use the command lines bellow:
 
 
 change to the working folder: 
