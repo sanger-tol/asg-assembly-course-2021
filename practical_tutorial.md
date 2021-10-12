@@ -77,7 +77,7 @@ Now that you have (i) started a kmer counter run, (ii) plotted the pre-computed 
 ## Part 2 - Genome assembly and evaluation
 In the morning you have generated and interpreted genome composition by analyzing the reads kmers. With that information in hand, now let’s assemble your reads. We will use the assembler [hifiasm](https://github.com/chhylp123/hifiasm). Have a try on the command below taking into consideration your species of choice:
 
-The full data-sets for genome assembly can be downloaded using the links below. These datasets are large enough to demand a large amount of time for processing that's why in the next section we will try to run assembly on the subsets of 1000 reads alreadt downloaded for you on the Virtual Machine.
+The full data-sets for genome assembly can be downloaded using the links below. These datasets are large enough to demand a large amount of time for processing that's why in the next section we will try to run assembly on the subsets of 1000 reads already downloaded for you on the Virtual Machine.
 
 http://darwin.cog.sanger.ac.uk/idEriArbu1.hifi.filtered.fasta.gz
 
