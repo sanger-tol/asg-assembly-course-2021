@@ -57,20 +57,18 @@ change to results folder:
 
 Now that you have (i) started a kmer counter run, (ii) plotted the pre-computed results in genome scope, you can analyse them and discuss them with your colleagues.  Answer the following questions:
 
-&nbsp;&nbsp;&nbsp;&nbsp; 1-) What is the estimated genome size?
+&nbsp;&nbsp;&nbsp;&nbsp; 1. What is the estimated genome size?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 2-) What is the estimated percentage of repeats?
+&nbsp;&nbsp;&nbsp;&nbsp; 2. What is the estimated percentage of repeats?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 3-) What is the estimated heterozygosity?
+&nbsp;&nbsp;&nbsp;&nbsp; 3. What is the estimated heterozygosity?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 4-) What is the kmers coverage?
+&nbsp;&nbsp;&nbsp;&nbsp; 4. What is the kmers coverage?
 
 ## Part 2 - Genome assembly and evaluation
 In the morning you have generated and interpreted genome composition by analyzing the reads kmers. With that information in hand, now let’s assemble your reads. We will use the assembler [hifiasm](https://github.com/chhylp123/hifiasm). Have a try on the command below taking into consideration your species of choice:
 
-The full data-sets for genome assembly are here:
-
-Download the HiFi data (filtered) from here:
+The full data-sets for genome assembly can be downloaded using the links below. These datasets are large enough to demand a large amount of time for processing that's why in the next section we will try to run assembly on the subsets of 1000 reads alreadt downloaded for you on the Virtual Machine.
 
 http://darwin.cog.sanger.ac.uk/idEriArbu1.hifi.filtered.fasta.gz
 
@@ -78,7 +76,7 @@ http://darwin.cog.sanger.ac.uk/ilThySylv1.filtered.fasta.gz
 
 ### 2.1 - Genome assembly with hifiasm
 
-You should create a folder where your results will be created and then run the assembler. 
+Create a folder where your results will be stored and then run the assembler: 
 
     cd /home/training/assembly/workdir/
     mkdir idEriArbu1.hifiasm 
@@ -93,7 +91,7 @@ or for ilThySylv1,
     cd ilThySylv1.hifiasm
     singularity exec /home/training/assembly/images/hifiasm-0.15.3.sif hifiasm  -t8 --primary -o ilThySylv1 /home/training/assembly/data/raw/ilThySylv1/ilThySylv1.filtered.1000.fasta.gz
     
-<ins>Obs</ins>: Again, as we don’t have enough time to wait for your command to run, we have hifiasm results for you. Now symlink the assembly results to your folder and generate the general assembly statistics for them as following:
+<ins>Obs</ins>: The results of hifiasm runs on the full datasets can be found in the `/home/training/assembly/data/assembly` folder. You can have a look at some general quantitative assembly statistics by running the following commands:
 
     singularity exec /home/training/assembly/images/asmstats.sif asmstats /home/training/assembly/data/assembly/idEriArbu1/idEriArbu1.p_ctg.fa.gz
     singularity exec /home/training/assembly/images/asmstats.sif asmstats /home/training/assembly/data/assembly/idEriArbu1/idEriArbu1.a_ctg.fa.gz
@@ -102,7 +100,7 @@ or for ilThySylv1,
 
 ### 2.2 - Running BUSCO
 
-BUSCO is an important metric to evaluate the assembly completeness in gene level. We are running BUSCO using the following command lines.
+BUSCO is an important metric to evaluate the assembly completeness in gene level. We are running BUSCO using the following command lines:
 
     cd /home/training/assembly/workdir/
     gunzip -c /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.p_ctg.fa.gz > /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.p_ctg.fa
@@ -132,15 +130,15 @@ or for ilThySylv1,
 
 Looking at the statistics and BUSCO results for the hifiasm assembly, answer the following questions:
 
-&nbsp;&nbsp;&nbsp;&nbsp; 5-) Why do we have a “p” and “a” assembly results?
+&nbsp;&nbsp;&nbsp;&nbsp; 5. Why do we have a “p” and “a” assembly results?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 6-) What is the general statistics for the primary and alternate assemblies? How many contigs? N50? Total assembly length?
+&nbsp;&nbsp;&nbsp;&nbsp; 6. What is the general statistics for the primary and alternate assemblies? How many contigs? N50? Total assembly length?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 7-) How many complete BUSCO genes are identified in the primary contigs? How many of them were duplicated?
+&nbsp;&nbsp;&nbsp;&nbsp; 7. How many complete BUSCO genes are identified in the primary contigs? How many of them were duplicated?
 
 ### 2.3 - Interpreting purge_dups outputs
 
-As you learned in the theoretical classes, separation of haplotypes is usually not complete, and we use a software called [purge_dups](https://github.com/dfguan/purge_dups) to further separate the haplotypes and to remove remaining haplotypic duplication from the primary assembly. Purge_dups has many steps, and because we don't have the time to run it here with you, we have generated the results for you. Now, as you have done with the hifiasm results, you will generate the general statistics for the purged assemblies and evaluate the BUSCO results.
+As you learned in the theoretical classes, separation of haplotypes is usually not complete. We use a software called [purge_dups](https://github.com/dfguan/purge_dups) to further separate the haplotypes and to remove remaining haplotypic duplication from the primary assembly. Purge_dups has many steps and can take a significant amount of time to run. That's why the assembly produced by hifiasm was purged for you in advance and now you can generate the general statistics for the purged assemblies and evaluate the BUSCO results.
 
     singularity exec /home/training/assembly/images/asmstats.sif asmstats /home/training/assembly/data/assembly/idEriArbu1/purged/idEriArbu1.purged.fa.gz
     singularity exec /home/training/assembly/images/asmstats.sif asmstats /home/training/assembly/data/assembly/idEriArbu1/purged/idEriArbu1.purged.htigs.fa.gz
@@ -152,7 +150,7 @@ or for ilThySylv1,
 
 ### 2.4 - Kmer plots to evaluate assembly quality
 
-Apart from comparing general statistics of assembly pre and post purging and BUSCO, we have other metrics and methods that help us evaluate assembly completeness and quality. One method is [merqury](https://github.com/marbl/merqury) as we discussed in the theoretical class, that evaluates assembly kmer completeness and duplication by generating a series of plots and statistics of genome assembly compared with its reads counterparts. To do this comparison, you need to run merqury in all versions of your assembly; pre and post purging. Here we are going to run the command for only one version and then we will evaluate the pre-generated results for all versions.
+Apart from comparing quantitative statistics and the BUSCO score of the assemblies, there are other metrics and methods that help us evaluate assembly completeness and quality. One method discussed in the theoretical class is [merqury](https://github.com/marbl/merqury). Merqury evaluates assembly kmer completeness and duplication level by generating series of plots and statistics of a genome assembly vs. its reads counterparts. To do this comparison, you need to run merqury in all versions of your assembly, i.e. pre and post purging. The command-line bellow illustrates the way merqury can be run on a genome assembl, which in case of a large enough genome can also be a little time consumning:
 
     # Run merqury for the raw assembly of idEriArbu1
     mkdir merqury.idEriArbu1.raw
@@ -191,7 +189,7 @@ or for ilThySylv1,
 
 ### 2.5 - Evaluating pre and post genome purging
 
-You have now tried to run/evaluate results for several commands for genome assembly, (i) hifiasm, (ii) purge_dups, (iii) merqury, (iv) asmstats and (v) BUSCO. 
+You have now tried to run and evaluate the results of several stages of the genome assembly process, which included running (i) hifiasm, (ii) purge_dups, (iii) merqury, (iv) asmstats and (v) BUSCO commands. 
 
 Recapping, the assembly, purge and merqury results for each species are here:
 
@@ -209,19 +207,19 @@ or for ilThySylv1,
 
 #### **_Quiz_**
 
-You will now consider all the results generated for pre and post purge_dups of your species and answer the following questions:
+Considering all the results generated before and after purging of your species answer the following questions:
 
-&nbsp;&nbsp;&nbsp;&nbsp; 8-) Considering the general statistics of the primary assembly pre and post purging, what has happened with assembly length?
+&nbsp;&nbsp;&nbsp;&nbsp; 8. Considering the general statistics of the primary assembly before and after purging, what has happened with the assembly length?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 9-) Considering the BUSCO results, what has changed from pre and post purge dups?
+&nbsp;&nbsp;&nbsp;&nbsp; 9. Considering the BUSCO results, what has changed from pre to post purge dups?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 10-) Where, in the merqury plots, can you spot the difference in haplotypic retention pre and post purging?
+&nbsp;&nbsp;&nbsp;&nbsp; 10. Where in the merqury plots can you spot the difference in haplotypic retention pre and post purging?
 
 ## Part 3 - Polishing assemblies
 
 ## Part 4 - Scaffolding assembly with Hi-C data
 
-A final part of the automated pipeline for genome assembly is scaffolding. Here we will scaffold our Pacbio Hifi polished assembly with [Hi-C](https://pubmed.ncbi.nlm.nih.gov/22652625/) data using a software called [SALSA2](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007273). Again, scaffolding involves many steps that we don’t have time to run here. We will use our time to look at the general statistics and to interpret the contact maps that are generated after assemblies are scaffolded with Hi-C reads. Giving your species, download the results and unzip.
+A final part of the automated pipeline for a genome assembly is scaffolding. Here we will scaffold our Pacbio Hifi polished assembly with [Hi-C](https://pubmed.ncbi.nlm.nih.gov/22652625/) data using a software called [SALSA2](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007273). Scaffolding procedure also involves many steps that you can read about in the Salsa manual and that demand significant amount of time. We will use our time to look at the general statistics and to interpret the contact maps that are generated after assemblies are scaffolded with Hi-C reads. Giving your species, download the results and unzip.
 
     cd /home/training/assembly/workdir/
     wget https://darwin.cog.sanger.ac.uk/idEriArbu1.hifiasm.scaff.20210610.tar.gz
@@ -237,10 +235,10 @@ or for ilThySylv1,
 
 have a look at the files inside:
 
-    *hic - a HiC map file
-    *agp - a file with coordinates of initial contigs with the scaffolds
-    merqury
-    busco5
+- *hic - a HiC map file
+- *agp - a file with coordinates of initial contigs with the scaffolds
+- merqury
+- busco5
 
 
 The scaffold FASTA file is:
@@ -270,29 +268,29 @@ and then open the .hic file by going to File > Open > Local ...
 
 Checking the scaffolds and HiC contact map, answer the following questions:
 
-&nbsp;&nbsp;&nbsp;&nbsp; 11-) What is the final scaffold statistic for your assembly? Assembled size, N50, number of contigs, number of scaffolds...
+&nbsp;&nbsp;&nbsp;&nbsp; 11. What is the final scaffold statistic for your assembly? Assembled size, N50, number of contigs, number of scaffolds...
 
-&nbsp;&nbsp;&nbsp;&nbsp; 12-) What is the final BUSCO results? Has the BUSCO changed since polishing?
+&nbsp;&nbsp;&nbsp;&nbsp; 12. What is the final BUSCO results? Has the BUSCO changed since polishing?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 13-) How the final merqury results look like?
+&nbsp;&nbsp;&nbsp;&nbsp; 13. How the final merqury results look like?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 14-) How does your final contact map looks like? What are the squares in the diagonal? What do the signals off diagonal represent?
+&nbsp;&nbsp;&nbsp;&nbsp; 14. How does your final contact map looks like? What are the squares in the diagonal? What do the signals off diagonal represent?
 
 
 ## Part 5 - Quiz and presentation
 
 We have now completed our analysis. Now, talk to your colleagues and make a few slides with the following information.
 
-&nbsp;&nbsp;&nbsp;&nbsp; 15-) What is your species name
+&nbsp;&nbsp;&nbsp;&nbsp; 15. What is your species name?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 16-) what was the estimated genome size
+&nbsp;&nbsp;&nbsp;&nbsp; 16. What was the estimated genome size?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 17-) Was is the primary assembled size pre and post purge dups. Do they correspond to the estimated genome size?
+&nbsp;&nbsp;&nbsp;&nbsp; 17. Was is the primary assembled size before and after purging. Do the values correspond to the estimated genome size?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 18-) How did BUSCO change pre and post purging?
+&nbsp;&nbsp;&nbsp;&nbsp; 18. How did BUSCO change after purging?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 19-) How did statistics and BUSCO change after polishing?
+&nbsp;&nbsp;&nbsp;&nbsp; 19. How did statistics and BUSCO change after polishing?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 20-) How did statistics change after scaffolding?
+&nbsp;&nbsp;&nbsp;&nbsp; 20. How did statistics change after scaffolding?
 
-&nbsp;&nbsp;&nbsp;&nbsp; 21-) In your HiC contact map, where are your main scaffolds represented?
+&nbsp;&nbsp;&nbsp;&nbsp; 21. In your HiC contact map, where are your main scaffolds represented?
