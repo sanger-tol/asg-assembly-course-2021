@@ -8,9 +8,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp; [2.3 - Interpreting purge_dups outputs](#23---interpreting-purge_dups-outputs)\
 &nbsp;&nbsp;&nbsp;&nbsp; [2.4 - Kmer plots to evaluate assembly quality](#24---kmer-plots-to-evaluate-assembly-quality)\
 &nbsp;&nbsp;&nbsp;&nbsp; [2.5 - Evaluating pre and post genome purging](#25---evaluating-pre-and-post-genome-purging) &nbsp;&nbsp;&nbsp;&nbsp; <ins>[Quiz](#quiz-2)</ins>\
-[Part 3 - Polishing assemblies](#part-3---polishing-assemblies)\
-[Part 4 - Scaffolding assembly with Hi-C data](#part-4---scaffolding-assembly-with-hi-c-data) &nbsp;&nbsp;&nbsp;&nbsp; <ins>[Quiz](#quiz-3)</ins>\
-[Part 5 - Quiz and presentation](#part-5---quiz-and-presentation) &nbsp;&nbsp;&nbsp;&nbsp; <ins>[Quiz](#part-5---quiz-and-presentation)</ins>
+[Part 3 - Scaffolding assembly with Hi-C data](#part-3---scaffolding-assembly-with-hi-c-data) &nbsp;&nbsp;&nbsp;&nbsp; <ins>[Quiz](#quiz-3)</ins>\
+[Part 4 - Quiz and presentation](#part-4---quiz-and-presentation) &nbsp;&nbsp;&nbsp;&nbsp; <ins>[Quiz](#part-4---quiz-and-presentation)</ins>
 
 ***
 Consider the two species in the following paths and choose the one you will work with. The species are [Eristalis arbustorum](https://tolqc.cog.sanger.ac.uk/darwin/insects/Eristalis_arbustorum/) (ToLID: **idEriArbu1**) and [Thymelicus sylvestris](https://tolqc.cog.sanger.ac.uk/darwin/insects/Thymelicus_sylvestris/) (ToLID: **ilThySylv1**). The genomic data for them are here:
