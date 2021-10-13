@@ -117,7 +117,8 @@ or, for **ilThySylv1**, run:
     cd ilThySylv1.hifiasm
     singularity exec /home/training/assembly/images/hifiasm-0.15.3.sif hifiasm  -t8 --primary -o ilThySylv1 /home/training/assembly/data/raw/ilThySylv1/ilThySylv1.filtered.1000.fasta.gz
     
-### 2.1.1 : The results of hifiasm runs on the full datasets can be found in the `/home/training/assembly/data/assembly` folder. You can have a look at some general quantitative assembly statistics by running the following commands. 
+### 2.1.1 -
+The results of hifiasm runs on the full datasets can be found in the `/home/training/assembly/data/assembly` folder. You can have a look at some general quantitative assembly statistics by running the following commands. 
 
 For **idEriArbu1**, run:
 
@@ -145,6 +146,7 @@ or, for **ilThySylv1**, run:
     gunzip -c /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.p_ctg.fa.gz > /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.p_ctg.fa
     singularity exec /home/training/assembly/images/busco-5.0.0_cv1.sif busco -i /home/training/assembly/data/assembly/ilThySylv1/ilThySylv1.p_ctg.fa -c 8 -o ilThySylv1.busco5 -m genome -l /home/training/assembly/data/busco/lineages/insecta_odb10 --offline
 
+### 2.2.2 
 We also have the BUSCO results for the hifiasm assembly. Download the precomputed results and have a look at the results, especially the "short summary" file.
 
 For **idEriArbu1**, run:
