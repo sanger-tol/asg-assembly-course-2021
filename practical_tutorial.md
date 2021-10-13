@@ -117,7 +117,7 @@ or, for **ilThySylv1**, run:
     cd ilThySylv1.hifiasm
     singularity exec /home/training/assembly/images/hifiasm-0.15.3.sif hifiasm  -t8 --primary -o ilThySylv1 /home/training/assembly/data/raw/ilThySylv1/ilThySylv1.filtered.1000.fasta.gz
     
-<ins>Obs</ins>: The results of hifiasm runs on the full datasets can be found in the `/home/training/assembly/data/assembly` folder. You can have a look at some general quantitative assembly statistics by running the following commands. 
+### 2.1.1 : The results of hifiasm runs on the full datasets can be found in the `/home/training/assembly/data/assembly` folder. You can have a look at some general quantitative assembly statistics by running the following commands. 
 
 For **idEriArbu1**, run:
 
