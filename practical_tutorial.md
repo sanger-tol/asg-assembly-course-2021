@@ -186,6 +186,22 @@ or, for **ilThySylv1**, run:
 
     singularity exec /home/training/assembly/images/asmstats.sif asmstats /home/training/assembly/data/assembly/ilThySylv1/purged/ilThySylv1.purged.fa.gz
     singularity exec /home/training/assembly/images/asmstats.sif asmstats /home/training/assembly/data/assembly/ilThySylv1/purged/ilThySylv1.purged.htigs.fa.gz
+    
+Now we will have a look at the precomputed BUSCO results for the purged rimary assembly:
+
+For **idEriArbu1** run
+    cd /home/training/assembly/workdir/
+    wget https://darwin.cog.sanger.ac.uk/idEriArbu1.purged.insecta_odb10.busco.tar.gz
+    tar -xzvf idEriArbu1.purged.insecta_odb10.busco.tar.gz
+    cd idEriArbu1.purged.insecta_odb10.busco
+    
+    
+or, for **ilThySylv1**, run:
+    cd /home/training/assembly/workdir/
+    wget https://darwin.cog.sanger.ac.uk/ilThySylv1.purged.insecta_odb10.busco.tar.gz
+    tar -xzvf ilThySylv1.purged.insecta_odb10.busco.tar.gz
+    cd ilThySylv1.purged.insecta_odb10.busco
+
 
 ### 2.4 - Kmer plots to evaluate assembly quality
 
