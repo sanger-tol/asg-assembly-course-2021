@@ -27,6 +27,10 @@ Create a working folder for this course:
 
 As you learned in the theoretical lectures, genome sizes can be estimated by kmer analyses of high-quality reads, such as Illumina and Pacbio HiFi. To do it so, first you would need to generate a kmer count histogram using KMC tool. It may require a significant amount of time, that's why we try it on the toy containing a subset of 1000 reads below.  
 
+First, activate the conda environment with pre-installed singularity software: 
+
+    conda activate assembly
+
 If your genome is **idEriArbu1** genome run the following commands:
    
     cd /home/training/assembly/workdir
