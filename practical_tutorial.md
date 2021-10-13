@@ -190,6 +190,7 @@ or, for **ilThySylv1**, run:
 Now we will have a look at the precomputed BUSCO results for the purged rimary assembly:
 
 For **idEriArbu1** run
+    
     cd /home/training/assembly/workdir/
     wget https://darwin.cog.sanger.ac.uk/idEriArbu1.purged.insecta_odb10.busco.tar.gz
     tar -xzvf idEriArbu1.purged.insecta_odb10.busco.tar.gz
@@ -197,6 +198,7 @@ For **idEriArbu1** run
     
     
 or, for **ilThySylv1**, run:
+    
     cd /home/training/assembly/workdir/
     wget https://darwin.cog.sanger.ac.uk/ilThySylv1.purged.insecta_odb10.busco.tar.gz
     tar -xzvf ilThySylv1.purged.insecta_odb10.busco.tar.gz
