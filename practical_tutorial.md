@@ -202,7 +202,7 @@ or, for **ilThySylv1**, run:
     cd /home/training/assembly/workdir/
     wget https://darwin.cog.sanger.ac.uk/ilThySylv1.purged.insecta_odb10.busco.tar.gz
     tar -xzvf ilThySylv1.purged.insecta_odb10.busco.tar.gz
-    cd ilThySylv1.purged.insecta_odb10.busco
+    cd purged.insecta_odb10.busco
 
 
 ### 2.4 - Kmer plots to evaluate assembly quality
